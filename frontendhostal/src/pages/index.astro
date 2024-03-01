@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+class habitacion {
+	nombre: string;
+	descripcion: string;
+	imagen: string;
+	localizacion: string;
+	precio: number;
+	calificacion: number;
+	disponibilidad: boolean;
+	tipoDeHabitacion: string;
+	capacidad: number;
+	huespedes: {
+		nombre: string;
+		apellido: string;
+		edad: number;
+		documento: string;
+		telefono: string;
+		fechas: {
+			fechaDeSalida: Date;
+			fechaDeLlegada: Date;
+		};
+	};
+	servicios: {
+		piscina: boolean;
+		wifi: boolean;
+		estacionamiento: boolean;
+		restaurante: boolean;
+		bar: boolean;
+		spa: boolean;
+		gimnasio: boolean;
+	};
+}
+---
+
+<Layout title="Find the best Hotels around the SENA">
+	<Header />
+	<div class="hotelCard">
+		<img
+			src="https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805//partner-images/75/39/b93330baba6361083255d6c4b4871df59e8957cd8e30a725f0985e0c8594.jpeg"
+			alt=""
+		/>
+		<div class="info">
+			<h1>Hotel Canandaigua, Tapestry</h1>
+			<p>Hotel</p>
+			<p>Ciudad: Bogotá</p>
+			<p>8.9 - Excellent</p>
+		</div>
+		<div class="price">
+			<p>$100</p>
+			<button>Reservar</button>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	html {
+	}
+
+	.hotelCard {
+		border-radius: 20px;
+		display: flex;
+		width: 90%;
+		height: 150px;
+		background-color: white;
+	}
+
+
+</style>
