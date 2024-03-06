@@ -1,42 +1,70 @@
+---
+interface Props {
+	nombre: string;
+	tipoHotel: string;
+	ciudad: string;
+	valoracion: number;
+	precio: number;
+	img: string;
+}
+
+const { nombre, tipoHotel, ciudad, valoracion, precio, img } = Astro.props;
+
+var tal = "";
+if (valoracion > 10 && valoracion < 0) {
+	tal = "OUT OF RANGE: error";
+} else {
+	if (valoracion > 0 && valoracion < 3.5) {
+		tal = "Mala";
+	} else if (valoracion > 3.5 && valoracion <= 6) {
+		tal = "Mao meno";
+	} else if (valoracion > 6 && valoracion <= 8) {
+		tal = "Buena";
+	} else if (valoracion > 8 && valoracion <= 10) {
+		tal = "Excelente";
+	}
+}
+
+---
+
 <div class="hotelCard">
-    <img
-        src="https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805//partner-images/75/39/b93330baba6361083255d6c4b4871df59e8957cd8e30a725f0985e0c8594.jpeg"
-        alt=""
-    />
-    <div class="info">
-        <h1>Hotel Canandaigua, Tapestry</h1>
-        <p class="tipoHotel">Hotel</p>
-        <p class="ciudad">Ciudad: Bogotá</p>
-        <p class="valoracion">8.9 - Excellent</p>
-    </div>
-    <div class="price">
-        <p>&dollar;100</p>
-        <button>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-receipt-2"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path stroke="none" d="M0 0h24v24H0z" fill="none"
-                ></path><path
-                    d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"
-                ></path><path
-                    d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5"
-                ></path></svg
-            >
-            Reservar</button
-        >
-    </div>
+	<img
+		src={img}
+		alt=""
+	/>
+	<div class="info">
+		<h1>{nombre}</h1>
+		<p class="tipoHotel">{tipoHotel}</p>
+		<p class="ciudad">Ciudad: {ciudad}</p>
+		<p class="valoracion">{valoracion} - {tal}</p>
+	</div>
+	<div class="price">
+		<p>&dollar;{precio}</p>
+		<button>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="icon icon-tabler icon-tabler-receipt-2"
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke="currentColor"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+					d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"
+				></path><path
+					d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5"
+				></path></svg
+			>
+			Reservar</button
+		>
+	</div>
 </div>
 
 <style>
-    .hotelCard {
+	.hotelCard {
 		max-width: 930px;
 		margin: 20px 0px;
 		border-radius: 20px;
@@ -47,11 +75,10 @@
 		transition: all 0.2s ease-in-out;
 	}
 
-	.hotelCard:hover{
-		box-shadow: 0px 5px 2px rgba(0,0,0,0.2);
+	.hotelCard:hover {
+		box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.2);
 		transform: translateY(-5px);
 	}
-	
 
 	.hotelCard img {
 		border-radius: 20px 0px 0px 20px;
@@ -101,7 +128,7 @@
 		cursor: pointer;
 	}
 
-	.hotelCard .price button:hover{
+	.hotelCard .price button:hover {
 		background-color: rgb(40, 25, 255);
 	}
 </style>

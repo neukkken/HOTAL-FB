@@ -135,16 +135,28 @@ import HotelCard from "../components/HotelCard.astro";
 // console.log(habitacion1.mostrarInfo());
 // console.log("ola mundo");
 
+const response = await fetch('https://hoteles-backend.onrender.com/habitation/');
+const data = await response.json();
+console.log(data);
+
 
 ---
 
 <Layout title="Find the best Hotels around the SENA">
 	<Header />
-	<HotelCard/>
-	<HotelCard/>
-	<HotelCard/>
-	<HotelCard/>
-	<HotelCard/>
+	<div class="cardsContainer">
+		{data.map(data => (
+      <HotelCard
+        nombre={data.nombre}
+        img={data.imagen}
+        nombre={data.nombre}
+        tipoHotel={data.tipoDeHabitacion}
+		valoracion={data.calificacion}
+        precio={data.precio}
+		ciudad={data.localizacion}
+      />
+    ))}
+	</div>
 </Layout>
 
 <style>
