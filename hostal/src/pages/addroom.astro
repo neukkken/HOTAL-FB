@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+if (Astro.request.method === "POST") {
+      try {
+        const data = await Astro.request.formData();
+        const name = data.get("nombre");
+        const description = data.get("descripcion");
+        const capacity = data.get("capacidad");
+        const type = data.get("tipo");
+        const location = data.get("localizacion");
+        const price = data.get("precio");
+        const image = data.get("imagen");
+        
+        const apiUrl = 'https://hoteles-backend.onrender.com/habitation/';
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            description,
+            capacity,
+            type,
+            location,
+            price,
+            image
+          }),
+        });
+        const data2 = await response.json();
+  
+        Astro.redirect("/");
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        }
+      }
+    }
+---
+  
+
+<Layout title="Add Hotel">
+    <div class="addRoomContainer">
+        <form method="POST">
+            <h1>Agregar una habitacion</h1>
+            <input type="text" placeholder="Nombre" name="nombre">
+            <input type="text" placeholder="Descripcion" name="descripcion">
+            <input type="number" placeholder="Capacidad" name="capacidad">
+            <input type="text" placeholder="Tipo" name="tipo">
+            <input type="text" placeholder="Localizacion" name="localizacion">
+            <input type="number" placeholder="Precio" name="precio">
+            <input type="text" placeholder="Imagen" name="imagen">
+            <button type="submit">Agregar</button>
+
+        </form>
+    </div>
+</Layout>
+
+
+<style>
+
+
+    .addRoomContainer{
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        border-radius: 10px;
+        height: 80vh;
+        margin: 10vh 0px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .addRoomContainer h1{
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .addRoomContainer form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+    }
+
+    .addRoomContainer form input{
+        background-color: #f4f4f4;
+        width: 50%;
+        outline-color: rgba(0, 110, 110, 0.493);
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+        padding: 0px 20px;
+        
+    }
+
+    .addRoomContainer form button{
+        background-color: rgb(0, 110, 110);
+        color: white;
+        width: 20%;
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+        padding: 0px 20px;
+        cursor: pointer;
+        transition: ease-in-out 0.2s;
+    }
+
+    .addRoomContainer form button:hover{
+        background-color: rgb(4, 160, 160);
+    }	
+</style>
